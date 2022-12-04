@@ -1,0 +1,55 @@
+.task {
+  width: 36.5em;
+  height: 5.5em;
+  margin: auto;
+  margin-top: 1em;
+  border: 1px solid #8d99ff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.task:hover {
+  box-shadow: 0 0 11px rgba(141, 153, 255, 0.7);
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 1.5em 0.5em 1.5em;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+#name-task {
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 500;
+  font-size: 1.25em;
+}
+
+#dataprevista-task {
+  padding-left: 1.5em;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: 600;
+  font-size: 1em;
+}
+
+#status-1 {
+  width: 1.5em;
+  height: 1.5em;
+  background-color: #4aa4f8;
+  border-radius: 100%;
+}
+
+#status-2 {
+  width: 1.5em;
+  height: 1.5em;
+  background-color: #fe5454;
+  border-radius: 100%;
+}
+
+#status-3 {
+  width: 1.5em;
+  height: 1.5em;
+  background-color: #8ef66a;
+  border-radius: 100%;
+}

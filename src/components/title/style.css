@@ -1,0 +1,10 @@
+.header,
+#span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#span {
+  gap: 1.125em;
+}

@@ -1,0 +1,29 @@
+.body {
+  width: 36.8em;
+  margin: auto;
+  margin-top: 8.5%;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.components {
+  margin-top: 0.5em;
+  height: 23em;
+  overflow-x: hidden;
+}
+
+#details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2em;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.components::-webkit-scrollbar {
+  display: none;
+}
