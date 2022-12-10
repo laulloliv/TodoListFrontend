@@ -1,13 +1,13 @@
-.body {
-  width: 587px;
+.body-home {
+  width: 36.8em;
   margin: auto;
-  margin-top: 8.5%;
+  margin-top: 7.5%;
   align-items: center;
   justify-content: center;
   font-family: 'Roboto', sans-serif;
 }
 
-.components {
+.components-home {
   display: flex;
   align-items: center;
   justify-content: space-between;

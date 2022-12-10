@@ -6,16 +6,18 @@ interface BoxCategoryProps {
   children?: ReactNode
   className?: string
   item?: string
+  onClick?: React.MouseEventHandler<HTMLElement>
 }
 
 export const BoxCategory = ({
   text,
   children,
   className,
-  item
+  item,
+  onClick
 }: BoxCategoryProps) => {
   return (
-    <div className={className}>
+    <div className={className} onClick={onClick}>
       <div id={item}>
         <p>{text}</p>
         {children}

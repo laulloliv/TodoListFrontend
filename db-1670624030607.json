@@ -1,0 +1,77 @@
+{
+  "tarefa": [
+    {
+      "id": 1,
+      "titulo": "Jogar Bola 1",
+      "descricao": "Convidar as meninas para o jogo na sexta.",
+      "dataPrevista": "10/10/2022",
+      "dataConclusao": "12/10/2022",
+      "categoria": "esportes"
+    },
+    {
+      "id": 2,
+      "titulo": "Jogar Bola 2",
+      "descricao": "Convidar as meninas para o jogo na sexta.",
+      "dataPrevista": "10/10/2022",
+      "dataConclusao": "12/10/2022",
+      "categoria": "esportes"
+    },
+    {
+      "id": 3,
+      "titulo": "Jogar Bola 3",
+      "descricao": "Convidar as meninas para o jogo na sexta.",
+      "dataPrevista": "10/10/2022",
+      "dataConclusao": "12/10/2022",
+      "categoria": "esportes"
+    }
+  ],
+  "categoria": [
+    {
+      "id": 1,
+      "titulo": "Todos",
+      "descricao": "Todas as tarefas"
+    },
+    {
+      "id": 2,
+      "titulo": "Trabalho",
+      "descricao": "Todas as tarefas de Trabalho"
+    },
+    {
+      "id": 3,
+      "titulo": "Viagens",
+      "descricao": "Todas as tarefas de Viagens"
+    },
+    {
+      "id": 4,
+      "titulo": "Educacao",
+      "descricao": "Todas as tarefas de Educacao"
+    },
+    {
+      "id": 5,
+      "titulo": "Esportes",
+      "descricao": "Todas as tarefas de Esportes"
+    },
+    {
+      "id": 6,
+      "titulo": "Outras",
+      "descricao": "Todas as outras tarefas"
+    }
+  ],
+  "status": [
+    {
+      "id": 1,
+      "titulo": "Para Fazer",
+      "descricao": "Para tarefas nao realizadas"
+    },
+    {
+      "id": 2,
+      "titulo": "Em Atraso",
+      "descricao": "Para tarefas em atraso"
+    },
+    {
+      "id": 3,
+      "titulo": "Concluida",
+      "descricao": "Para tarefas concluidas"
+    }
+  ]
+}

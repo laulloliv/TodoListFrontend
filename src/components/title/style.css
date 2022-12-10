@@ -8,3 +8,14 @@
 #span {
   gap: 1.125em;
 }
+
+span {
+  cursor: pointer;
+  border-radius: 4px;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+
+span:hover {
+  box-shadow: 0 0 11px rgba(0, 0, 0, 0.15);
+}

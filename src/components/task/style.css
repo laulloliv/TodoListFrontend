@@ -1,4 +1,5 @@
-.task {
+.task,
+.task-details {
   width: 36.5em;
   height: 5.5em;
   margin: auto;
@@ -6,6 +7,10 @@
   border: 1px solid #8d99ff;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.task-details {
+  height: auto;
 }
 
 .task:hover {
@@ -33,23 +38,62 @@
   font-size: 1em;
 }
 
-#status-1 {
-  width: 1.5em;
-  height: 1.5em;
-  background-color: #4aa4f8;
-  border-radius: 100%;
+#status-t {
+  color: #4aa4f8;
 }
 
-#status-2 {
-  width: 1.5em;
-  height: 1.5em;
-  background-color: #fe5454;
-  border-radius: 100%;
-}
-
+#status-1,
+#status-2,
 #status-3 {
   width: 1.5em;
   height: 1.5em;
-  background-color: #8ef66a;
   border-radius: 100%;
+}
+
+#status-1 {
+  background-color: #4aa4f8;
+}
+
+#status-2 {
+  background-color: #fe5454;
+}
+
+#status-3 {
+  background-color: #8ef66a;
+}
+
+/* ------ */
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 1em;
+  margin-left: 1.25em;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+#dtprev-details,
+#desc-details,
+#category-details {
+  font-weight: 400;
+  font-size: 1.125em;
+  margin-left: 0.75em;
+}
+
+#desc-details {
+  width: 26em;
+}
+
+#text {
+  align-items: flex-start;
+}
+
+.footer-task {
+  color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-right: 1.5em;
+  padding-bottom: 1em;
 }
