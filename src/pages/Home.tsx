@@ -28,65 +28,46 @@ export const View = () => {
 
   useEffect(() => {
     // Lista todas as tarefas
-    api
-      .get('/tarefas')
-      .then(response => {
-        setTarefas(response.data)
-        console.log(response.data)
-      })
-      .catch(err => {
-        console.error('ops! ocorreu um erro' + err)
-      })
+    async function getAllTasks() {
+      const response = await api.get('/tarefas')
+      setTarefas(response.data)
+    }
+    getAllTasks()
+
     // Lista apenas da categoria trabalho
-    api
-      .get('/tarefas/categoria/trabalho')
-      .then(response => {
-        setTrabalho(response.data)
-        console.log(response.data)
-      })
-      .catch(err => {
-        console.error('ops! ocorreu um erro' + err)
-      })
+    async function getWorkTasks() {
+      const response = await api.get('/tarefas/categoria/trabalho')
+      setTrabalho(response.data)
+    }
+    getWorkTasks()
+
     // Lista apenas da categoria viagens
-    api
-      .get('/tarefas/categoria/viagens')
-      .then(response => {
-        setViagens(response.data)
-        console.log(response.data)
-      })
-      .catch(err => {
-        console.error('ops! ocorreu um erro' + err)
-      })
+    async function getTravelTasks() {
+      const response = await api.get('/tarefas/categoria/viagens')
+      setViagens(response.data)
+    }
+    getTravelTasks()
+
     // Lista apenas da categoria educacao
-    api
-      .get('/tarefas/categoria/educação')
-      .then(response => {
-        setEducacao(response.data)
-        console.log(response.data)
-      })
-      .catch(err => {
-        console.error('ops! ocorreu um erro' + err)
-      })
+    async function getEducationTasks() {
+      const response = await api.get('/tarefas/categoria/educação')
+      setEducacao(response.data)
+    }
+    getEducationTasks()
+
     // Lista apenas da categoria esportes
-    api
-      .get('/tarefas/categoria/esportes')
-      .then(response => {
-        setEsportes(response.data)
-        console.log(response.data)
-      })
-      .catch(err => {
-        console.error('ops! ocorreu um erro' + err)
-      })
+    async function getSportsTasks() {
+      const response = await api.get('/tarefas/categoria/esportes')
+      setEsportes(response.data)
+    }
+    getSportsTasks()
+
     // Lista apenas da categoria outras
-    api
-      .get('/tarefas/categoria/outras')
-      .then(response => {
-        setOutras(response.data)
-        console.log(response.data)
-      })
-      .catch(err => {
-        console.error('ops! ocorreu um erro' + err)
-      })
+    async function getOthersTasks() {
+      const response = await api.get('/tarefas/categoria/outras')
+      setOutras(response.data)
+    }
+    getOthersTasks()
   }, [])
 
   const Home = () => {
