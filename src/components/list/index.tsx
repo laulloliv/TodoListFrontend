@@ -5,6 +5,20 @@ import { Title } from '../title'
 import './style.css'
 
 export const Tasks = (props: any) => {
+  const List = () => {
+    const data = props.data
+    const listTasks = data.map((r: any) => (
+      <Task
+        key={r.id}
+        status={'status-t'}
+        text={r.titulo}
+        dataPrev={r.dataPrevista}
+        data={r}
+      ></Task>
+    ))
+    return <div className="components-tasks">{listTasks}</div>
+  }
+
   return (
     <div className="body">
       <Title
@@ -14,28 +28,12 @@ export const Tasks = (props: any) => {
         isHome={false}
         onClick={props.onClick}
       ></Title>
-      <Search></Search>
+      <Search toCreate={props.toCreate}></Search>
       <div id="details">
-        <p className="details-p">Categoria: Todos</p>
-        <p className="details-p">Qtd: 14</p>
+        <p className="details-p">Categoria: {props.category}</p>
+        <p className="details-p">Qtd: {props.data.length}</p>
       </div>
-      <div className="components-tasks">
-        <Task
-          status={'status-t'}
-          text={'Lavar roupas brancas'}
-          data={'10/12/2022'}
-        ></Task>
-        <Task
-          status={'status-2'}
-          text={'Comprar aspirador novo'}
-          data={'6/12/2022'}
-        ></Task>
-        <Task
-          status={'status-3'}
-          text={'Pagar a escola do Pedro'}
-          data={'10/12/2022'}
-        ></Task>
-      </div>
+      <List></List>
     </div>
   )
 }

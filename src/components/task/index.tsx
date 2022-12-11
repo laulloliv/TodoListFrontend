@@ -5,59 +5,103 @@ import {
   TextAlignLeft,
   TrashSimple
 } from 'phosphor-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { check_data } from '../../utils/data'
 import './style.css'
 
 interface TaskProps {
   status?: string
   text?: string
-  data?: string
+  dataPrev?: string
   onClick?: React.MouseEventHandler<HTMLElement>
+  data: any
 }
 
-export const Task = ({ status, text, data, onClick }: TaskProps) => {
+export const Task = ({ status, text, dataPrev, onClick, data }: TaskProps) => {
   const [show, setShow] = useState(true)
+  const [done, setDone] = useState(true)
+  const [dataStatusOk, setDataStatusOk] = useState(true)
+
+  const data_ver = (dataPrev: any) => {
+    let dataVal = check_data(dataPrev, '10/12/2022')
+
+    if (dataVal < 0) {
+      console.log('Atividade em atraso', dataVal)
+      setDataStatusOk(false)
+    }
+    console.log('Atividade em dia', dataVal)
+
+    return
+  }
+
+  useEffect(() => {
+    data_ver(dataPrev)
+  }, [dataPrev, dataStatusOk])
 
   return show ? (
-    <>
-      <div className="task">
-        <div className="info">
-          <p id="name-task" onClick={() => setShow(!show)}>
-            {text}
-          </p>
-          <div id="status-1"></div>
-        </div>
-        <p id="dataprevista-task">Concluir até {data}</p>
+    <div className="task">
+      <div className="info">
+        <p
+          id={done ? 'name-task' : 'name-task-done'}
+          onClick={() => {
+            setShow(!show)
+            data_ver(dataPrev)
+          }}
+        >
+          {text}
+        </p>
+        <div
+          id={
+            dataStatusOk && done ? 'status-2' : done ? 'status-1' : 'status-3'
+          }
+          onClick={() => {
+            setDone(!done)
+          }}
+        ></div>
       </div>
-    </>
+      <p id="dataprevista-task">
+        {' '}
+        {done ? 'Concluir até ' : 'Concluído em '}
+        {dataPrev}
+      </p>
+    </div>
   ) : (
     <>
       <div className="task-details">
         <div className="info">
-          <p id="name-task" onClick={() => setShow(!show)}>
+          <p
+            id={done ? 'name-task' : 'name-task-done'}
+            onClick={() => setShow(!show)}
+          >
             {text}
           </p>
-          {/* <div id={status}></div> */}
-          <CheckCircle size={32} id={status} />
+
+          {done ? (
+            <CheckCircle
+              size={32}
+              id={dataStatusOk ? 'status-t2' : 'status-t'}
+              onClick={() => setDone(!done)}
+            />
+          ) : (
+            <div id="status-3" onClick={() => setDone(!done)}></div>
+          )}
         </div>
         <div className="icons">
           <CalendarCheck size={32} />
-          <p id="dtprev-details">Concluir até {data}</p>
+          <p id="dtprev-details">
+            {done ? 'Concluir até ' : 'Concluído em '} {dataPrev}
+          </p>
         </div>
         <div className="icons" id="text">
           <TextAlignLeft size={32} />
-          <p id="desc-details">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam
-            ipsa dignissimos ab quaerat. Quam cumque animi vel esse consequatur.
-            Ut!
-          </p>
+          <p id="desc-details">{data.descricao}</p>
         </div>
         <div className="icons">
           <Tag size={32} />
-          <p id="category-details">Outras</p>
+          <p id="category-details">{data.categoria.titulo}</p>
         </div>
         <div className="footer-task">
-          <TrashSimple size={26} />
+          <TrashSimple size={26} id="delete-icon" />
         </div>
       </div>
     </>

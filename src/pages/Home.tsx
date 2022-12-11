@@ -10,13 +10,84 @@ import {
 import { BoxCategory } from '../components/box'
 import { Search } from '../components/form/Search'
 import { Title } from '../components/title'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './style.css'
 import { NewTask } from '../components/form/NewTask'
 import { Tasks } from '../components/list'
+import api from '../api'
 
 export const View = () => {
   const [view, setView] = useState(0)
+  const [showTasks, setShowTasks] = useState(0)
+  const [tarefas, setTarefas] = useState()
+  const [trabalho, setTrabalho] = useState()
+  const [viagens, setViagens] = useState()
+  const [educacao, setEducacao] = useState()
+  const [esportes, setEsportes] = useState()
+  const [outras, setOutras] = useState()
+
+  useEffect(() => {
+    // Lista todas as tarefas
+    api
+      .get('/tarefas')
+      .then(response => {
+        setTarefas(response.data)
+        console.log(response.data)
+      })
+      .catch(err => {
+        console.error('ops! ocorreu um erro' + err)
+      })
+    // Lista apenas da categoria trabalho
+    api
+      .get('/tarefas/categoria/trabalho')
+      .then(response => {
+        setTrabalho(response.data)
+        console.log(response.data)
+      })
+      .catch(err => {
+        console.error('ops! ocorreu um erro' + err)
+      })
+    // Lista apenas da categoria viagens
+    api
+      .get('/tarefas/categoria/viagens')
+      .then(response => {
+        setViagens(response.data)
+        console.log(response.data)
+      })
+      .catch(err => {
+        console.error('ops! ocorreu um erro' + err)
+      })
+    // Lista apenas da categoria educacao
+    api
+      .get('/tarefas/categoria/educação')
+      .then(response => {
+        setEducacao(response.data)
+        console.log(response.data)
+      })
+      .catch(err => {
+        console.error('ops! ocorreu um erro' + err)
+      })
+    // Lista apenas da categoria esportes
+    api
+      .get('/tarefas/categoria/esportes')
+      .then(response => {
+        setEsportes(response.data)
+        console.log(response.data)
+      })
+      .catch(err => {
+        console.error('ops! ocorreu um erro' + err)
+      })
+    // Lista apenas da categoria outras
+    api
+      .get('/tarefas/categoria/outras')
+      .then(response => {
+        setOutras(response.data)
+        console.log(response.data)
+      })
+      .catch(err => {
+        console.error('ops! ocorreu um erro' + err)
+      })
+  }, [])
 
   const Home = () => {
     return (
@@ -33,37 +104,60 @@ export const View = () => {
             text={'Todos'}
             item={'item-1'}
             children={<ClipboardText size={32} />}
-            onClick={() => setView(1)}
+            onClick={() => {
+              setView(1)
+              setShowTasks(0)
+            }}
           ></BoxCategory>
           <BoxCategory
             className={'category-2'}
             text={'Trabalho'}
             item={'item-2'}
             children={<SuitcaseSimple size={32} />}
+            onClick={() => {
+              setView(1)
+              setShowTasks(1)
+            }}
           ></BoxCategory>
           <BoxCategory
             className={'category-3'}
             text={'Viagens'}
             item={'item-3'}
             children={<PaperPlaneTilt size={32} />}
+            onClick={() => {
+              setView(1)
+              setShowTasks(2)
+            }}
           ></BoxCategory>
           <BoxCategory
             className={'category-4'}
             text={'Educação'}
             item={'item-4'}
             children={<GraduationCap size={32} />}
+            onClick={() => {
+              setView(1)
+              setShowTasks(3)
+            }}
           ></BoxCategory>
           <BoxCategory
             className={'category-5'}
             text={'Esportes'}
             item={'item-5'}
             children={<Barbell size={32} />}
+            onClick={() => {
+              setView(1)
+              setShowTasks(4)
+            }}
           ></BoxCategory>
           <BoxCategory
             className={'category-6'}
             text={'Outras'}
             item={'item-6'}
             children={<Hash size={32} />}
+            onClick={() => {
+              setView(1)
+              setShowTasks(5)
+            }}
           ></BoxCategory>
         </div>
       </div>
@@ -75,7 +169,71 @@ export const View = () => {
       case 0:
         return <Home></Home>
       case 1:
-        return <Tasks onClick={() => setView(0)}></Tasks>
+        switch (showTasks) {
+          case 0:
+            return (
+              <Tasks
+                onClick={() => setView(0)}
+                toCreate={() => setView(2)}
+                category={'Todos'}
+                data={tarefas}
+              ></Tasks>
+            )
+          case 1:
+            return (
+              <Tasks
+                onClick={() => setView(0)}
+                toCreate={() => setView(2)}
+                category={'Trabalho'}
+                data={trabalho}
+              ></Tasks>
+            )
+          case 2:
+            return (
+              <Tasks
+                onClick={() => setView(0)}
+                toCreate={() => setView(2)}
+                category={'Viagens'}
+                data={viagens}
+              ></Tasks>
+            )
+          case 3:
+            return (
+              <Tasks
+                onClick={() => setView(0)}
+                toCreate={() => setView(2)}
+                category={'Educação'}
+                data={educacao}
+              ></Tasks>
+            )
+          case 4:
+            return (
+              <Tasks
+                onClick={() => setView(0)}
+                toCreate={() => setView(2)}
+                category={'Esportes'}
+                data={esportes}
+              ></Tasks>
+            )
+          case 5:
+            return (
+              <Tasks
+                onClick={() => setView(0)}
+                toCreate={() => setView(2)}
+                category={'Outras'}
+                data={outras}
+              ></Tasks>
+            )
+          default:
+            return (
+              <Tasks
+                onClick={() => setView(0)}
+                toCreate={() => setView(2)}
+                data={tarefas}
+              ></Tasks>
+            )
+        }
+
       case 2:
         return <NewTask onClick={() => setView(0)}></NewTask>
       default:
