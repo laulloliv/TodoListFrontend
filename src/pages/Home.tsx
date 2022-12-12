@@ -13,18 +13,20 @@ import { Title } from '../components/title'
 import { useEffect, useState } from 'react'
 import './style.css'
 import { NewTask } from '../components/form/NewTask'
-import { Tasks } from '../components/list'
-import api from '../api'
+import { Tasks } from './list'
+import api from '../services/api'
 
 export const View = () => {
   const [view, setView] = useState(0)
   const [showTasks, setShowTasks] = useState(0)
-  const [tarefas, setTarefas] = useState()
-  const [trabalho, setTrabalho] = useState()
-  const [viagens, setViagens] = useState()
-  const [educacao, setEducacao] = useState()
-  const [esportes, setEsportes] = useState()
-  const [outras, setOutras] = useState()
+  const [searchByName, setSearchByName] = useState([])
+  const [search, setSearch] = useState('')
+  const [tarefas, setTarefas] = useState([])
+  const [trabalho, setTrabalho] = useState([])
+  const [viagens, setViagens] = useState([])
+  const [educacao, setEducacao] = useState([])
+  const [esportes, setEsportes] = useState([])
+  const [outras, setOutras] = useState([])
 
   useEffect(() => {
     // Lista todas as tarefas
@@ -70,6 +72,26 @@ export const View = () => {
     getOthersTasks()
   }, [])
 
+  useEffect(() => {
+    // // Lista resultada da busca por nome
+    async function getByNameTask(titulo: string) {
+      const response = await api.get(`/tarefas/titulo/${titulo}`)
+      setSearchByName(response.data)
+      console.log('Lista busca')
+      console.log(searchByName)
+    }
+    getByNameTask(search)
+  }, [search])
+
+  // Callback de Pesquisa
+  const handler_search = (e: any, result: string) => {
+    e.preventDefault()
+    console.log(result)
+    setSearch(result)
+    setView(3)
+    return
+  }
+
   const Home = () => {
     return (
       <div className="body-home">
@@ -78,7 +100,10 @@ export const View = () => {
           children={<ListBullets size={32} />}
           isHome={true}
         />
-        <Search toCreate={() => setView(2)}></Search>
+        <Search
+          toCreate={() => setView(2)}
+          handler_search={handler_search}
+        ></Search>
         <div className="components-home">
           <BoxCategory
             className={'category-1'}
@@ -157,7 +182,9 @@ export const View = () => {
                 onClick={() => setView(0)}
                 toCreate={() => setView(2)}
                 category={'Todos'}
+                find={false}
                 data={tarefas}
+                handler_search={handler_search}
               ></Tasks>
             )
           case 1:
@@ -166,7 +193,9 @@ export const View = () => {
                 onClick={() => setView(0)}
                 toCreate={() => setView(2)}
                 category={'Trabalho'}
+                find={false}
                 data={trabalho}
+                handler_search={handler_search}
               ></Tasks>
             )
           case 2:
@@ -175,7 +204,9 @@ export const View = () => {
                 onClick={() => setView(0)}
                 toCreate={() => setView(2)}
                 category={'Viagens'}
+                find={false}
                 data={viagens}
+                handler_search={handler_search}
               ></Tasks>
             )
           case 3:
@@ -184,7 +215,9 @@ export const View = () => {
                 onClick={() => setView(0)}
                 toCreate={() => setView(2)}
                 category={'Educação'}
+                find={false}
                 data={educacao}
+                handler_search={handler_search}
               ></Tasks>
             )
           case 4:
@@ -193,7 +226,9 @@ export const View = () => {
                 onClick={() => setView(0)}
                 toCreate={() => setView(2)}
                 category={'Esportes'}
+                find={false}
                 data={esportes}
+                handler_search={handler_search}
               ></Tasks>
             )
           case 5:
@@ -202,7 +237,9 @@ export const View = () => {
                 onClick={() => setView(0)}
                 toCreate={() => setView(2)}
                 category={'Outras'}
+                find={false}
                 data={outras}
+                handler_search={handler_search}
               ></Tasks>
             )
           default:
@@ -210,13 +247,27 @@ export const View = () => {
               <Tasks
                 onClick={() => setView(0)}
                 toCreate={() => setView(2)}
+                category={'Todos'}
+                find={false}
                 data={tarefas}
+                handler_search={handler_search}
               ></Tasks>
             )
         }
 
       case 2:
         return <NewTask onClick={() => setView(0)}></NewTask>
+      case 3:
+        return (
+          <Tasks
+            onClick={() => setView(0)}
+            toCreate={() => setView(2)}
+            category={`Resultados de '${search}'`}
+            find={true}
+            data={[searchByName]}
+            handler_search={handler_search}
+          ></Tasks>
+        )
       default:
         return <Home></Home>
     }

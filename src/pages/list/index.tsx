@@ -1,11 +1,11 @@
 import { ArrowLeft, CheckSquareOffset } from 'phosphor-react'
-import { Search } from '../form/Search'
+import { Search } from '../../components/form/Search'
 import { Task } from '../task'
-import { Title } from '../title'
+import { Title } from '../../components/title'
 import './style.css'
 
 export const Tasks = (props: any) => {
-  const List = () => {
+  function List() {
     const data = props.data
     const listTasks = data.map((r: any) => (
       <Task
@@ -28,9 +28,17 @@ export const Tasks = (props: any) => {
         isHome={false}
         onClick={props.onClick}
       ></Title>
-      <Search toCreate={props.toCreate}></Search>
+      <Search
+        toCreate={props.toCreate}
+        handler_search={props.handler_search}
+      ></Search>
       <div id="details">
-        <p className="details-p">Categoria: {props.category}</p>
+        {props.find ? (
+          <p className="details-p">{props.category}</p>
+        ) : (
+          <p className="details-p">Categoria: {props.category}</p>
+        )}
+
         <p className="details-p">Qtd: {props.data.length}</p>
       </div>
       <List></List>

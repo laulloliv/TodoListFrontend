@@ -62,3 +62,7 @@
 #bcreate:hover {
   background-color: rgba(141, 153, 255, 0.8);
 }
+
+#hidden {
+  display: none;
+}

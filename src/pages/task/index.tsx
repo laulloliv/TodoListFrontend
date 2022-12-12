@@ -6,6 +6,7 @@ import {
   TrashSimple
 } from 'phosphor-react'
 import { useEffect, useState } from 'react'
+import api from '../../services/api'
 import { check_data } from '../../utils/data'
 import './style.css'
 
@@ -21,6 +22,17 @@ export const Task = ({ status, text, dataPrev, onClick, data }: TaskProps) => {
   const [show, setShow] = useState(true)
   const [done, setDone] = useState(true)
   const [dataStatusOk, setDataStatusOk] = useState(true)
+
+  // Deleta uma tarefa
+  async function deleteTask(id: number) {
+    const res = await api.delete(`/tarefas/${id}`)
+  }
+
+  const handler_delete_task = (id: number) => {
+    deleteTask(id)
+    window.location.reload()
+    console.log('Tarefa deletada!')
+  }
 
   const data_ver = (dataPrev: any) => {
     let dataVal = check_data(dataPrev, '10/12/2022')
@@ -100,7 +112,10 @@ export const Task = ({ status, text, dataPrev, onClick, data }: TaskProps) => {
           <Tag size={32} />
           <p id="category-details">{data.categoria.titulo}</p>
         </div>
-        <div className="footer-task">
+        <div
+          className="footer-task"
+          onClick={() => handler_delete_task(data.id)}
+        >
           <TrashSimple size={26} id="delete-icon" />
         </div>
       </div>
