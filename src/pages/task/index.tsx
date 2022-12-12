@@ -35,7 +35,7 @@ export const Task = ({ status, text, dataPrev, onClick, data }: TaskProps) => {
   }
 
   const data_ver = (dataPrev: any) => {
-    let dataVal = check_data(dataPrev, '10/12/2022')
+    let dataVal = check_data(dataPrev)
 
     if (dataVal < 0) {
       console.log('Atividade em atraso', dataVal)

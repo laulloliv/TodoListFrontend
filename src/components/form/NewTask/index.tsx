@@ -1,6 +1,8 @@
 import { ArrowLeft, CheckSquareOffset } from 'phosphor-react'
 import { useState } from 'react'
 import api from '../../../services/api'
+import { convertDataInput } from '../../../utils/data'
+// import { mascaraData } from '../../../utils/data'
 import { Title } from '../../title'
 import './style.css'
 
@@ -12,10 +14,12 @@ export const NewTask = (props: any) => {
 
   const newTaskSubmit = (e: any) => {
     e.preventDefault()
+    const dataFormat = convertDataInput(dataPrev)
+    console.log(dataFormat)
     const data = {
       titulo: titulo,
       descricao: descricao,
-      dataPrevista: dataPrev,
+      dataPrevista: dataFormat,
       dataConclusao: null,
       categoria: {
         id: categoria
@@ -31,6 +35,7 @@ export const NewTask = (props: any) => {
     }
     postTask(data)
     console.log('Tarefa Criada!')
+    window.location.reload()
   }
 
   return (
@@ -67,19 +72,6 @@ export const NewTask = (props: any) => {
         </label>
         <div className="inline">
           <label className="label-form" id="label">
-            Data prevista
-            <input
-              name="dataPrev"
-              type="date"
-              className="i-form"
-              // placeholder="mm/dd/aaaa"
-              id="datap"
-              required
-              onChange={e => setDataPrev(e.target.value)}
-              value={dataPrev}
-            ></input>
-          </label>
-          <label className="label-form" id="label">
             Categoria
             <select
               name="select-category"
@@ -88,15 +80,27 @@ export const NewTask = (props: any) => {
               onChange={e => setCategoria(e.target.value)}
               value={categoria}
             >
-              <option value={0} id="sdefault" disabled selected>
-                Selecione...
+              <option value={5} id="sdefault" selected>
+                Selecione uma categoria
               </option>
               <option value={1}>Trabalho</option>
               <option value={2}>Viagens</option>
               <option value={3}>Educação</option>
               <option value={4}>Esportes</option>
-              <option value={5}>Outros</option>
+              <option value={5}>Outras</option>
             </select>
+          </label>
+          <label className="label-form" id="label">
+            Data prevista
+            <input
+              name="dataPrev"
+              type="date"
+              className="i-form"
+              id="datap"
+              required
+              onChange={e => setDataPrev(e.target.value)}
+              value={dataPrev}
+            ></input>
           </label>
           <button id="create-task" type="submit">
             Adicionar
