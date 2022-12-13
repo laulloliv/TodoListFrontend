@@ -39,9 +39,15 @@ export const Tasks = (props: any) => {
           <p className="details-p">Categoria: {props.category}</p>
         )}
 
-        <p className="details-p">Qtd: {props.data.length}</p>
+        <p className="details-p">
+          Qtd: {props.data[0] === '' ? 0 : props.data.length}
+        </p>
       </div>
-      <List></List>
+      {props.data[0] === '' ? (
+        <p className="notFind">Tarefa não encontrada :(</p>
+      ) : (
+        <List></List>
+      )}
     </div>
   )
 }

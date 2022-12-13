@@ -77,8 +77,6 @@ export const View = () => {
     async function getByNameTask(titulo: string) {
       const response = await api.get(`/tarefas/titulo/${titulo}`)
       setSearchByName(response.data)
-      console.log('Lista busca')
-      console.log(searchByName)
     }
     getByNameTask(search)
   }, [search])

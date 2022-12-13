@@ -38,11 +38,8 @@ export const Task = ({ status, text, dataPrev, onClick, data }: TaskProps) => {
     let dataVal = check_data(dataPrev)
 
     if (dataVal < 0) {
-      console.log('Atividade em atraso', dataVal)
       setDataStatusOk(false)
     }
-    console.log('Atividade em dia', dataVal)
-
     return
   }
 
